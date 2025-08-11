@@ -1,0 +1,468 @@
+import { useState, useEffect } from 'react'
+import { Button } from '@/components/ui/button.jsx'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
+import { Badge } from '@/components/ui/badge.jsx'
+import { Globe, Users, TrendingUp, Award, Mail, Phone, MapPin, ExternalLink } from 'lucide-react'
+import MediaKit from './components/MediaKit.jsx'
+import './App.css'
+
+// Import logo assets
+import mainLogo from './assets/main-logo.jpg'
+import cleanMainLogo from './assets/clean-main-logo.png'
+import sharpMainLogo from './assets/sharp-main-logo.png'
+import originalQualityLogo from './assets/original-quality-logo.png'
+import dubaiLogo from './assets/Dubai.jpg'
+import egyptLogo from './assets/egypt.jpg'
+import athensLogo from './assets/greece-athens.jpg'
+import riyadhLogo from './assets/ksa-riyadh.jpg'
+import beijingLogo from './assets/china-beijing.jpg'
+import singaporeLogo from './assets/singapore.jpg'
+import argentinaLogo from './assets/argentina.jpg'
+import lagosLogo from './assets/nigeria-lagos.jpg'
+import bakuLogo from './assets/azerbaijan-baku.jpg'
+import beirutLogo from './assets/lebanon-beirut.jpg'
+import dohaLogo from './assets/qatar-doha.jpg'
+import tehranLogo from './assets/iran-tehran.jpg'
+import telavivLogo from './assets/israel-telaviv.jpg'
+import ammanLogo from './assets/jordan-amman.jpg'
+import muscatLogo from './assets/oman-muscat.jpg'
+import baghdadLogo from './assets/bagdad.jpg'
+import casablancaLogo from './assets/moroco-casablanca.jpg'
+import damascusLogo from './assets/syria-damascus.jpg'
+import tunisLogo from './assets/tunisia.jpg'
+import seoulLogo from './assets/korea-seoul.jpg'
+import delhiLogo from './assets/india-newdelhi.jpg'
+import kualaLumpurLogo from './assets/malasia.jpg'
+import taipeiLogo from './assets/taiwan.jpg'
+import budapestLogo from './assets/budapest.jpg'
+import kyivLogo from './assets/kyiv.jpg'
+import moscowLogo from './assets/russia-moscow.jpg'
+import capetownLogo from './assets/capetown.jpg'
+import panamaLogo from './assets/panama.jpg'
+import brazilLogo from './assets/brazil.jpg'
+
+function App() {
+  const [activeSection, setActiveSection] = useState('home')
+
+  // Brand data organized by region
+  const brandsByRegion = {
+    'Middle East & North Africa': [
+      { name: 'Good Morning Dubai', logo: dubaiLogo, domain: 'goodmorningdubai.com', city: 'Dubai', country: 'UAE' },
+      { name: 'Good Morning Egypt', logo: egyptLogo, domain: 'goodmorningegypt.com', city: 'Cairo', country: 'Egypt' },
+      { name: 'Good Morning Riyadh', logo: riyadhLogo, domain: 'goodmorningriyadh.com', city: 'Riyadh', country: 'Saudi Arabia' },
+      { name: 'Good Morning Doha', logo: dohaLogo, domain: 'goodmorningdoha.com', city: 'Doha', country: 'Qatar' },
+      { name: 'Good Morning Beirut', logo: beirutLogo, domain: 'goodmorningbeirut.com', city: 'Beirut', country: 'Lebanon' },
+      { name: 'Good Morning Tehran', logo: tehranLogo, domain: 'goodmorningtehran.com', city: 'Tehran', country: 'Iran' },
+      { name: 'Good Morning Tel Aviv', logo: telavivLogo, domain: 'goodmorningtelaviv.com', city: 'Tel Aviv', country: 'Israel' },
+      { name: 'Good Morning Amman', logo: ammanLogo, domain: 'goodmorningamman.com', city: 'Amman', country: 'Jordan' },
+      { name: 'Good Morning Muscat', logo: muscatLogo, domain: 'goodmorningmuscat.com', city: 'Muscat', country: 'Oman' },
+      { name: 'Good Morning Baghdad', logo: baghdadLogo, domain: 'goodmorningbaghdad.com', city: 'Baghdad', country: 'Iraq' },
+      { name: 'Good Morning Casablanca', logo: casablancaLogo, domain: 'goodmorningcasablanca.com', city: 'Casablanca', country: 'Morocco' },
+      { name: 'Good Morning Damascus', logo: damascusLogo, domain: 'goodmorningdamascus.com', city: 'Damascus', country: 'Syria' },
+      { name: 'Good Morning Tunis', logo: tunisLogo, domain: 'goodmorningtunis.com', city: 'Tunis', country: 'Tunisia' }
+    ],
+    'Europe': [
+      { name: 'Good Morning Athens', logo: athensLogo, domain: 'goodmorningathen.com', city: 'Athens', country: 'Greece' },
+      { name: 'Good Morning Budapest', logo: budapestLogo, domain: 'goodmorningbudapest.com', city: 'Budapest', country: 'Hungary' },
+      { name: 'Good Morning Kyiv', logo: kyivLogo, domain: 'goodmorningkyiv.com', city: 'Kyiv', country: 'Ukraine' },
+      { name: 'Good Morning Moscow', logo: moscowLogo, domain: 'goodmorningmoscow.com', city: 'Moscow', country: 'Russia' }
+    ],
+    'Asia-Pacific': [
+      { name: 'Good Morning Beijing', logo: beijingLogo, domain: 'goodmorningbeijing.com', city: 'Beijing', country: 'China' },
+      { name: 'Good Morning Seoul', logo: seoulLogo, domain: 'goodmorningseoul.com', city: 'Seoul', country: 'South Korea' },
+      { name: 'Good Morning Singapore', logo: singaporeLogo, domain: 'goodmorningsingapore.com', city: 'Singapore', country: 'Singapore' },
+      { name: 'Good Morning New Delhi', logo: delhiLogo, domain: 'goodmorningnewdelhi.com', city: 'New Delhi', country: 'India' },
+      { name: 'Good Morning Kuala Lumpur', logo: kualaLumpurLogo, domain: 'goodmorningkualalumpur.com', city: 'Kuala Lumpur', country: 'Malaysia' },
+      { name: 'Good Morning Taipei', logo: taipeiLogo, domain: 'goodmorningtaipei.com', city: 'Taipei', country: 'Taiwan' }
+    ],
+    'Americas': [
+      { name: 'Good Morning Argentina', logo: argentinaLogo, domain: 'goodmorningargentina.com', city: 'Buenos Aires', country: 'Argentina' },
+      { name: 'Good Morning Brazil', logo: brazilLogo, domain: 'goodmorningbrazil.com', city: 'São Paulo', country: 'Brazil' },
+      { name: 'Good Morning Panama', logo: panamaLogo, domain: 'goodmorningpanama.com', city: 'Panama City', country: 'Panama' }
+    ],
+    'Africa': [
+      { name: 'Good Morning Lagos', logo: lagosLogo, domain: 'goodmorninglagos.com', city: 'Lagos', country: 'Nigeria' },
+      { name: 'Good Morning Cape Town', logo: capetownLogo, domain: 'goodmorningcapetown.com', city: 'Cape Town', country: 'South Africa' }
+    ],
+    'Special Regions': [
+      { name: 'Good Morning Baku', logo: bakuLogo, domain: 'goodmorningbaku.com', city: 'Baku', country: 'Azerbaijan' }
+    ]
+  }
+
+  const stats = [
+    { icon: Globe, number: '45+', label: 'Morning Shows', description: 'Across six continents' },
+    { icon: Users, number: '28.5M', label: 'Social Followers', description: 'Engaged community' },
+    { icon: TrendingUp, number: '150M', label: 'Monthly Viewers', description: 'Global audience' },
+    { icon: Award, number: '92%', label: 'Brand Recognition', description: 'In served markets' }
+  ]
+
+  const Navigation = () => (
+    <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center space-x-2">
+            <img 
+              src={originalQualityLogo} 
+              alt="The Good Morning Show" 
+              className="h-12 w-auto object-contain"
+              style={{ imageRendering: 'crisp-edges' }}
+            />
+            <span className="text-xl font-bold gm-text-gradient">The Good Morning Show</span>
+          </div>
+          <div className="hidden md:flex space-x-8">
+            {['Home', 'Brands', 'About', 'Media Kit', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => setActiveSection(item.toLowerCase().replace(' ', ''))}
+                className={`text-sm font-medium transition-colors ${
+                  activeSection === item.toLowerCase().replace(' ', '')
+                    ? 'text-[var(--gm-blue)]'
+                    : 'text-gray-600 hover:text-[var(--gm-blue)]'
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          <Button className="bg-[var(--gm-blue)] hover:bg-[var(--gm-dark)] text-white">
+            Get Started
+          </Button>
+        </div>
+      </div>
+    </nav>
+  )
+
+  const Hero = () => (
+    <section className="pt-24 pb-16 gm-gradient text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center gm-animate-fade-in">
+          <h1 className="gm-hero-text text-white mb-6">
+            The World's Premier<br />
+            <span className="text-[var(--gm-light)]">Morning Talk Show</span>
+          </h1>
+          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+            A global daily livestreaming business and entertainment show connecting communities worldwide. 
+            We discuss Real Estate & Construction, Retail & Consumer Goods, Education, Travel & Hospitality, 
+            Transportation & Logistics, Banking & Finance, Healthcare & Pharma, Health & Wellness, 
+            Politics & Economics, Technology, E-commerce, and Sustainability & Social Responsibility.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-white text-[var(--gm-blue)] hover:bg-gray-100 font-semibold px-8 py-3"
+              onClick={() => setActiveSection('brands')}
+            >
+              Explore Our Brands
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-[var(--gm-blue)] font-semibold px-8 py-3"
+              onClick={() => setActiveSection('mediakit')}
+            >
+              View Media Kit
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+
+  const StatsSection = () => (
+    <section className="gm-section-padding bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Network by the Numbers</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our global reach and engagement demonstrate the power of authentic, 
+            community-focused daily livestreaming business and entertainment programming.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <div key={index} className="gm-stats-card gm-hover-scale">
+              <stat.icon className="w-12 h-12 text-[var(--gm-blue)] mx-auto mb-4" />
+              <div className="text-4xl font-bold text-[var(--gm-blue)] mb-2">{stat.number}</div>
+              <div className="text-lg font-semibold text-gray-900 mb-1">{stat.label}</div>
+              <div className="text-sm text-gray-600">{stat.description}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+
+  const BrandsSection = () => (
+    <section className="gm-section-padding">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Global Brand Family</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            From Dubai to Athens, Beijing to Lagos, each Good Morning show celebrates the unique character 
+            of its community while delivering engaging business and entertainment content through daily livestreaming.
+          </p>
+        </div>
+        
+        {Object.entries(brandsByRegion).map(([region, brands]) => (
+          <div key={region} className="mb-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+              <Badge variant="outline" className="text-lg px-4 py-2 border-[var(--gm-blue)] text-[var(--gm-blue)]">
+                {region}
+              </Badge>
+            </h3>
+            <div className="gm-logo-grid">
+              {brands.map((brand, index) => (
+                <Card key={index} className="gm-brand-card gm-hover-scale">
+                  <CardHeader className="text-center pb-4">
+                    <div className="w-full h-32 mb-4 rounded-lg overflow-hidden bg-gray-100">
+                      <img 
+                        src={brand.logo} 
+                        alt={brand.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <CardTitle className="text-lg font-bold text-gray-900">{brand.name}</CardTitle>
+                    <CardDescription className="text-sm text-gray-600">
+                      {brand.city}, {brand.country}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600">Website:</span>
+                        <a 
+                          href={`https://${brand.domain}`} 
+                          className="text-[var(--gm-blue)] hover:underline flex items-center gap-1"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {brand.domain}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600">Social:</span>
+                        <div className="flex gap-2 text-xs">
+                          <Badge variant="secondary">Instagram</Badge>
+                          <Badge variant="secondary">X</Badge>
+                          <Badge variant="secondary">TikTok</Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+
+  const AboutSection = () => (
+    <section className="gm-section-padding bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Mission</h2>
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              To be the world's leading localized morning talk show network, delivering authentic, 
+              culturally-relevant business and entertainment content through daily livestreaming that 
+              informs, inspires, and connects communities while celebrating the unique character of each location we serve.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-[var(--gm-blue)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Authenticity</h4>
+                  <p className="text-gray-600">Every show is created by and for its local community</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-[var(--gm-orange)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Cultural Celebration</h4>
+                  <p className="text-gray-600">Showcasing unique cultural heritage and traditions</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-[var(--gm-dark)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Quality Excellence</h4>
+                  <p className="text-gray-600">Maintaining the highest standards across all productions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="grid grid-cols-2 gap-4">
+              <img src={dubaiLogo} alt="Dubai" className="rounded-lg gm-shadow-brand" />
+              <img src={athensLogo} alt="Athens" className="rounded-lg gm-shadow-brand mt-8" />
+              <img src={beijingLogo} alt="Beijing" className="rounded-lg gm-shadow-brand -mt-8" />
+              <img src={lagosLogo} alt="Lagos" className="rounded-lg gm-shadow-brand" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+
+  const ContactSection = () => (
+    <section className="gm-section-padding">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Ready to partner with the world's premier morning talk show network? 
+            Let's start a conversation about how we can work together on our daily livestreaming platform.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <Card className="gm-brand-card text-center">
+            <CardHeader>
+              <MapPin className="w-12 h-12 text-[var(--gm-blue)] mx-auto mb-4" />
+              <CardTitle>Global Headquarters</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                1407 Broadway<br />
+                New York, NY 10018<br />
+                United States
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="gm-brand-card text-center">
+            <CardHeader>
+              <Phone className="w-12 h-12 text-[var(--gm-orange)] mx-auto mb-4" />
+              <CardTitle>Phone</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                +1-212-555-0100<br />
+                <span className="text-sm">Monday - Friday<br />9:00 AM - 6:00 PM EST</span>
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="gm-brand-card text-center">
+            <CardHeader>
+              <Mail className="w-12 h-12 text-[var(--gm-dark)] mx-auto mb-4" />
+              <CardTitle>Email</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p className="text-gray-600">
+                  <strong>partnerships@tgmshow.com</strong><br />
+                  For advertising & partnerships
+                </p>
+                <p className="text-gray-600 mt-4">
+                  <strong>press@tgmshow.com</strong><br />
+                  For media inquiries
+                </p>
+            </CardContent>
+          </Card>
+        </div>
+        
+        <div className="text-center mt-12">
+          <Button 
+            size="lg" 
+            className="bg-[var(--gm-blue)] hover:bg-[var(--gm-dark)] text-white px-8 py-3"
+          >
+            Download Media Kit
+          </Button>
+        </div>
+      </div>
+    </section>
+  )
+
+  const Footer = () => (
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div className="flex items-center space-x-2 mb-4">
+              <img 
+                src={originalQualityLogo} 
+                alt="The Good Morning Show" 
+                className="h-12 w-auto object-contain"
+                style={{ imageRendering: 'crisp-edges' }}
+              />
+              <span className="text-xl font-bold">The Good Morning Show</span>
+            </div>
+            <p className="text-gray-400 text-sm">
+              The world's premier morning talk show network, connecting communities across the globe through daily livestreaming.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Network</h4>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li><a href="#" className="hover:text-white">Our Brands</a></li>
+              <li><a href="#" className="hover:text-white">Global Reach</a></li>
+              <li><a href="#" className="hover:text-white">Content Strategy</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Partners</h4>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li><a href="#" className="hover:text-white">Advertising</a></li>
+              <li><a href="#" className="hover:text-white">Partnerships</a></li>
+              <li><a href="#" className="hover:text-white">Media Kit</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Connect</h4>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li><a href="#" className="hover:text-white">Contact Us</a></li>
+              <li><a href="#" className="hover:text-white">Press</a></li>
+              <li><a href="#" className="hover:text-white">Careers</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+          <p>&copy; 2025 The Good Morning Show. All rights reserved. | www.tgmshow.com</p>
+        </div>
+      </div>
+    </footer>
+  )
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'brands':
+        return <BrandsSection />
+      case 'about':
+        return <AboutSection />
+      case 'mediakit':
+        return <MediaKit />
+      case 'contact':
+        return <ContactSection />
+      default:
+        return (
+          <>
+            <Hero />
+            <StatsSection />
+            <BrandsSection />
+            <AboutSection />
+            <ContactSection />
+          </>
+        )
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Navigation />
+      {renderSection()}
+      <Footer />
+    </div>
+  )
+}
+
+export default App
+

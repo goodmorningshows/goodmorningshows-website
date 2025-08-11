@@ -1,0 +1,11 @@
+          <div className="text-lg md:text-xl text-white/90 max-w-4xl mx-auto space-y-4">
+            <p className="font-semibold text-xl md:text-2xl">
+              A Global Pulse on Business & Entertainment – Live, Unfiltered, and Everywhere You Are
+            </p>
+            <p>
+              Broadcasting daily across live streaming and podcast platforms, our global show delivers real-time conversations that connect communities around the world. We dive into the stories shaping our world — from breaking news in Real Estate, Construction, Retail, and Consumer Goods to in-depth analysis of Education, Travel & Hospitality, Transportation, Finance, Healthcare, Wellness, Technology, Geopolitics, and Global Economics.
+            </p>
+            <p>
+              Driven by dynamic dialogue and diverse voices, we're not just reporting the news — we're living it with you. And this is just the beginning. With plans to expand into radio and television, we're building a multimedia experience that informs, inspires, and ignites global connection.
+            </p>
+          </div>
