@@ -1,13 +1,822 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Good Morning Show - Global Daily Livestreaming Business & Entertainment Show | tgmshow.com</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Good Morning Show - Global Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .header-text h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .header-text p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #f8f9fa;
+        }
+        
+        .brands-section {
+            background: white;
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+        }
+        
+        .region {
+            margin-bottom: 4rem;
+        }
+        
+        .region-title {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .brand-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .brand-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand-domain {
+            color: #3498db;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 12px;
+            transition: transform 0.2s ease;
+        }
+        
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+        
+        .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .twitter { background: #1da1f2; }
+        .tiktok { background: #000; }
+        .youtube { background: #ff0000; }
+        .podcast { background: #9c27b0; }
+        
+        .contact {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .contact h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .brands-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">GM</div>
+                <div class="header-text">
+                    <h1>The Good Morning Show</h1>
+                    <p>Global Morning Talk Show Network</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Good Morning, World!</h2>
+            <p>The world's premier morning talk show network, broadcasting live daily across 45 cities on 6 continents</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">45</div>
+                    <div class="stat-label">Morning Shows</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Continents</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">150M+</div>
+                    <div class="stat-label">Monthly Viewers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Daily</div>
+                    <div class="stat-label">Live Streaming</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brands-section">
+        <div class="container">
+            <h2 class="section-title">Our Global Network</h2>
+            
+            <div class="region">
+                <h3 class="region-title">Middle East & North Africa (21 shows)</h3>
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Middle East</div>
+                        <div class="brand-domain">goodmorningmiddleeast.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Dubai</div>
+                        <div class="brand-domain">goodmorningdubai.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Ras Al-Khaimah</div>
+                        <div class="brand-domain">goodmorningrasalkhaimah.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Saudi Arabia</div>
+                        <div class="brand-domain">goodmorningsaudiarabia.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Riyadh</div>
+                        <div class="brand-domain">goodmorningriyadh.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Jeddah</div>
+                        <div class="brand-domain">goodmorningjeddah.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Red Sea</div>
+                        <div class="brand-domain">goodmorningredsea.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Qatar</div>
+                        <div class="brand-domain">goodmorningqatar.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Manama</div>
+                        <div class="brand-domain">goodmorningmanama.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Muscat</div>
+                        <div class="brand-domain">goodmorningmuscat.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Lebanon</div>
+                        <div class="brand-domain">goodmorninglebanon.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Beirut</div>
+                        <div class="brand-domain">goodmorningbeirut.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Tel Aviv</div>
+                        <div class="brand-domain">goodmorningtelaviv.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Damascus</div>
+                        <div class="brand-domain">goodmorningdamascus.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Jordan</div>
+                        <div class="brand-domain">goodmorningjordan.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Amman</div>
+                        <div class="brand-domain">goodmorningamman.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Egypt</div>
+                        <div class="brand-domain">goodmorningegypt.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Baghdad</div>
+                        <div class="brand-domain">goodmorningbaghdad.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Tehran</div>
+                        <div class="brand-domain">goodmorningtehran.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Casablanca</div>
+                        <div class="brand-domain">goodmorningcasablanca.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Tunisia</div>
+                        <div class="brand-domain">goodmorningtunis.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="region">
+                <h3 class="region-title">Europe (10 shows)</h3>
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Greece</div>
+                        <div class="brand-domain">goodmorninggreece.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Athens</div>
+                        <div class="brand-domain">goodmorningathens.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Russia</div>
+                        <div class="brand-domain">goodmorningrussia.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Moscow</div>
+                        <div class="brand-domain">goodmorningmoscow.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Ukraine</div>
+                        <div class="brand-domain">goodmorningukraine.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Kyiv</div>
+                        <div class="brand-domain">goodmorningkyiv.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Budapest</div>
+                        <div class="brand-domain">goodmorningbudapest.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Greenland</div>
+                        <div class="brand-domain">goodmorninggreenland.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Azerbaijan</div>
+                        <div class="brand-domain">goodmorningazerbaijan.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Baku</div>
+                        <div class="brand-domain">goodmorningbaku.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="region">
+                <h3 class="region-title">Asia-Pacific (7 shows)</h3>
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Beijing</div>
+                        <div class="brand-domain">goodmorningbeijing.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Seoul</div>
+                        <div class="brand-domain">goodmorningseoul.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Singapore</div>
+                        <div class="brand-domain">goodmorningsingapore.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning New Delhi</div>
+                        <div class="brand-domain">goodmorningnewdelhi.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Malaysia</div>
+                        <div class="brand-domain">goodmorningmalaysia.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Taipei</div>
+                        <div class="brand-domain">goodmorningtaipei.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Taiwan</div>
+                        <div class="brand-domain">goodmorningtaiwan.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="region">
+                <h3 class="region-title">Americas (5 shows)</h3>
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Argentina</div>
+                        <div class="brand-domain">goodmorningargentina.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Brazil</div>
+                        <div class="brand-domain">goodmorningbrazil.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Panama</div>
+                        <div class="brand-domain">goodmorningpanama.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Buenos Aires</div>
+                        <div class="brand-domain">goodmorningbuenosaires.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning São Paulo</div>
+                        <div class="brand-domain">goodmorningsaopaulo.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="region">
+                <h3 class="region-title">Africa (3 shows)</h3>
+                <div class="brands-grid">
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Lagos</div>
+                        <div class="brand-domain">goodmorninglagos.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Cape Town</div>
+                        <div class="brand-domain">goodmorningcapetown.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                    <div class="brand-card">
+                        <div class="brand-name">Good Morning Libya</div>
+                        <div class="brand-domain">goodmorninglibya.com</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link instagram">IG</a>
+                            <a href="#" class="social-link twitter">X</a>
+                            <a href="#" class="social-link tiktok">TT</a>
+                            <a href="#" class="social-link youtube">YT</a>
+                            <a href="#" class="social-link podcast">AP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <h3>Contact The Good Morning Show</h3>
+            <p><strong>Founder & CEO:</strong> Joey Laham</p>
+            <p><strong>Website:</strong> tgmshow.com</p>
+            <p><strong>Headquarters:</strong> New York, USA</p>
+            <p><strong>Focus:</strong> Business & Entertainment Daily Livestreaming</p>
+        </div>
+    </section>
+</body>
 </html>
